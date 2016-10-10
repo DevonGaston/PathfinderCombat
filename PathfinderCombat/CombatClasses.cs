@@ -16,7 +16,7 @@ namespace PathfinderCombat
         protected int BaseAttackBonus;
         protected int strike;
         Dice d20 = new D20();
-        Fighter(int level)
+        public Fighter(int level)
         {
             BaseAttackBonus = level;
         }

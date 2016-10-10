@@ -20,10 +20,17 @@ namespace PathfinderCombat
     /// </summary>
     public partial class MainWindow : Window
     {
+        CombatClasses fight = new Fighter(1);
+        Weapons sword = new Longsword();
         public MainWindow()
         {
             InitializeComponent();
         }
+        void Battle(object sender, RoutedEventArgs e)
+        {
+            GUI.Text = "Character swings..." + fight.attack() + " is rolled \n";
+            GUI.Text += "Character Hits! Deals " + sword.damage() + "!\n";
 
+        }
     }
 }

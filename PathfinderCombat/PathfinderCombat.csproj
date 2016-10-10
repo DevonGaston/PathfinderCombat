@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Weapons.cs" />
-    <Page Include="Battle.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,8 +66,8 @@
     </Compile>
     <Compile Include="CombatClasses.cs" />
     <Compile Include="Dice.cs" />
-    <Compile Include="Battle.xaml.cs">
-      <DependentUpon>Battle.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
