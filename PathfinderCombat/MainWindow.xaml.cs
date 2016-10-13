@@ -20,7 +20,8 @@ namespace PathfinderCombat
     /// </summary>
     public partial class MainWindow : Window
     {
-        CombatClasses fight = new Fighter(1);
+        CombatClasses fighter = new Fighter(1);
+        Monster living_dead = new Living_Dead(3);
         Weapons sword = new Longsword();
         public MainWindow()
         {
@@ -28,8 +29,10 @@ namespace PathfinderCombat
         }
         void Battle(object sender, RoutedEventArgs e)
         {
-            GUI.Text = "Character swings..." + fight.attack() + " is rolled \n";
-            GUI.Text += "Character Hits! Deals " + sword.damage() + "!\n";
+            GUI.Text = fighter.name + " attacks with " + sword.name + "..." + fighter.attack() + " is rolled \n";
+            GUI.Text += fighter.name + " Hits! Deals " + sword.damage() + " damage!\n";
+            GUI.Text += living_dead.name + " attacks with " + living_dead.w1.name + "..." + living_dead.strike() + " is rolled\n";
+            GUI.Text += living_dead.name + " Hits!  Deals " + living_dead.w1.damage() + " damage!\n";
 
         }
     }

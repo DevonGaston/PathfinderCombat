@@ -8,17 +8,37 @@ namespace PathfinderCombat
 {
     public abstract class Weapons
     {
+        protected Dice dam;
+        public string name;
+        public Weapons()
+        {
+        }
         public abstract int damage();
     }
 
     public class Longsword : Weapons
     {
-        protected int damage_dealt;
-        protected Dice d10 = new D10();
+        public Longsword() : base()
+        {
+            dam = new D10();
+            name = "Longsword";
+        }
         public override int damage()
         {
-            damage_dealt = d10.roll();
-            return damage_dealt;
+            return dam.roll();
+        }
+    }
+
+    public class Claws : Weapons
+    {
+        public Claws() : base()
+        {
+            name = "Claws";
+            dam = new D4();
+        }
+        public override int damage()
+        {
+            return dam.roll();
         }
     }
 }
