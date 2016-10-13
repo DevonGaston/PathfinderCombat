@@ -20,19 +20,26 @@ namespace PathfinderCombat
     /// </summary>
     public partial class MainWindow : Window
     {
-        CombatClasses fighter = new Fighter(1);
+        CombatClasses pclass = new Fighter(1);
         Monster living_dead = new Living_Dead(3);
         Weapons sword = new Longsword();
+        int reduce;
         public MainWindow()
         {
             InitializeComponent();
         }
         void Battle(object sender, RoutedEventArgs e)
         {
-            GUI.Text = fighter.name + " attacks with " + sword.name + "..." + fighter.attack() + " is rolled \n";
-            GUI.Text += fighter.name + " Hits! Deals " + sword.damage() + " damage!\n";
+            GUI.Text = pclass.name + " has " + pclass.health + " health\n";
+            GUI.Text += living_dead.name + " has " + living_dead.health + " health\n";
+            GUI.Text += pclass.name + " attacks with " + sword.name + "..." + pclass.attack() + " is rolled \n";
+            reduce = sword.damage();
+            GUI.Text += pclass.name + " Hits! Deals " + reduce + " damage!\n";
+            living_dead.reduce_health(reduce);
             GUI.Text += living_dead.name + " attacks with " + living_dead.w1.name + "..." + living_dead.strike() + " is rolled\n";
-            GUI.Text += living_dead.name + " Hits!  Deals " + living_dead.w1.damage() + " damage!\n";
+            reduce = living_dead.w1.damage();
+            GUI.Text += living_dead.name + " Hits!  Deals " + reduce + " damage!\n";
+            pclass.reduce_health(reduce);
 
         }
     }
