@@ -9,7 +9,6 @@ namespace PathfinderCombat
     abstract public class Character
     {
         protected Dice d20;
-        protected Dice hitDie;
         public Weapons w1;
         public string name;
         protected int BaseAttackBonus;
