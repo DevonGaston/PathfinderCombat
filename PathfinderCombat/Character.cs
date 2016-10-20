@@ -25,12 +25,12 @@ namespace PathfinderCombat
     }
     public class Monster : Character
     {
-        public Monster(string n, int attack, Dice hd, Weapons w, int damount) : base(n)
+        public Monster(string n, int attack, Dice hd, Weapons w, int level) : base(n)
         {
             BaseAttackBonus = attack;
             hitDie = hd;
             w1 = w;
-            for (int i = 0; i < damount; i++)
+            for (int i = 0; i < level; i++)
             {
                 health += hitDie.roll();
             }
@@ -51,4 +51,31 @@ namespace PathfinderCombat
         }
     }
 
+    public class Fighter : Character
+    {
+        public Fighter(string n, Weapons w, int level) : base(n)
+        {
+            BaseAttackBonus = level;
+            hitDie = new D10();
+            w1 = w;
+            for (int i = 0; i < level; i++)
+            {
+                health += hitDie.roll();
+            }
+        }
+        public override int attack()
+        {
+            return BaseAttackBonus + d20.roll();
+        }
+
+        public override int damage()
+        {
+            return w1.damage();
+        }
+        public override void reduce_health(int damage)
+        {
+            health -= damage;
+        }
+
+    }
 }
