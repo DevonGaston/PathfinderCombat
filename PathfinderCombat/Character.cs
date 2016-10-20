@@ -6,38 +6,37 @@ using System.Threading.Tasks;
 
 namespace PathfinderCombat
 {
-    public abstract class Monster
+    abstract public class Character
     {
-        protected Dice d20, hitDie;
+        protected Dice d20;
+        protected Dice hitDie;
         public Weapons w1;
         public string name;
-        public int health;
         protected int BaseAttackBonus;
-        public abstract int strike();
-        public abstract int damage();
-        public abstract void reduce_health(int damage);
-        public Monster(int attack)
+        public int health = 0;
+        public Character(string n)
         {
-            BaseAttackBonus = attack;
+            name = n;
             d20 = new D20();
         }
+        public abstract int attack();
+        public abstract int damage();
+        public abstract void reduce_health(int damage);
     }
-
-    public class Living_Dead : Monster
+    public class Monster : Character
     {
-        public Living_Dead(int attack) : base(attack)
+        public Monster(string n, int attack, Dice hd, Weapons w, int damount) : base(n)
         {
-            w1 = new Claws();
-            name = "Living Dead";
-            hitDie = new D8();
-            health = 3;
-            for(int i = 0; i < 2; i++)
+            BaseAttackBonus = attack;
+            hitDie = hd;
+            w1 = w;
+            for (int i = 0; i < damount; i++)
             {
                 health += hitDie.roll();
             }
         }
 
-        public override int strike()
+        public override int attack()
         {
             return BaseAttackBonus + d20.roll();
         }
@@ -46,10 +45,10 @@ namespace PathfinderCombat
         {
             return w1.damage();
         }
-
         public override void reduce_health(int damage)
         {
             health -= damage;
         }
     }
+
 }

@@ -21,7 +21,7 @@ namespace PathfinderCombat
     public partial class MainWindow : Window
     {
         CombatClasses pclass = new Fighter(1);
-        Monster living_dead = new Living_Dead(3);
+        Character living_dead = new Monster("Living Dead", 3, new D4(), new Claws(), 4);
         Weapons sword = new Longsword();
         int reduce;
         public MainWindow()
@@ -36,7 +36,7 @@ namespace PathfinderCombat
             reduce = sword.damage();
             GUI.Text += pclass.name + " Hits! Deals " + reduce + " damage!\n";
             living_dead.reduce_health(reduce);
-            GUI.Text += living_dead.name + " attacks with " + living_dead.w1.name + "..." + living_dead.strike() + " is rolled\n";
+            GUI.Text += living_dead.name + " attacks with " + living_dead.w1.name + "..." + living_dead.attack() + " is rolled\n";
             reduce = living_dead.w1.damage();
             GUI.Text += living_dead.name + " Hits!  Deals " + reduce + " damage!\n";
             pclass.reduce_health(reduce);
