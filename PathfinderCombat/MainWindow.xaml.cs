@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PathfinderCombat
 {
@@ -20,6 +8,7 @@ namespace PathfinderCombat
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Character> order = new List<Character>();
         Character pclass = new Fighter("Fighter", new Longsword(), 1);
         Character living_dead = new Monster("Living Dead", 3, new D4(), new Claws(), 4);
         int reduce;
@@ -29,6 +18,16 @@ namespace PathfinderCombat
         }
         void Battle(object sender, RoutedEventArgs e)
         {
+            order.Add(pclass);
+            order.Add(living_dead);
+            foreach (Character c in order)
+            {
+                c.setInitiative();
+            }
+            order.Sort(delegate (Character x, Character y)
+            {
+                return x.Initiative.CompareTo(y.Initiative);
+            });
             GUI.Text = pclass.name + " has " + pclass.health + " health\n";
             GUI.Text += living_dead.name + " has " + living_dead.health + " health\n";
             GUI.Text += pclass.name + " attacks with " + pclass.w1.name + "..." + pclass.attack() + " is rolled \n";
@@ -43,3 +42,4 @@ namespace PathfinderCombat
         }
     }
 }
+
