@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PathfinderCombat
 {
     abstract public class Character
@@ -12,7 +7,7 @@ namespace PathfinderCombat
         public Weapons w1;
         public string name;
         protected int BaseAttackBonus;
-        public int health = 0;
+        public int health = 0, Initiative;
         public Character(string n)
         {
             name = n;
@@ -21,6 +16,8 @@ namespace PathfinderCombat
         public abstract int attack();
         public abstract int damage();
         public abstract void reduce_health(int damage);
+        public abstract int rollInitiative();
+        public abstract void setInitiative();
     }
     public class Monster : Character
     {
@@ -48,6 +45,16 @@ namespace PathfinderCombat
         {
             health -= damage;
         }
+
+        public override int rollInitiative()
+        {
+            return d20.roll();
+        }
+
+        public override void setInitiative()
+        {
+            Initiative = rollInitiative();
+        }
     }
 
     public class Fighter : Character
@@ -74,6 +81,15 @@ namespace PathfinderCombat
         public override void reduce_health(int damage)
         {
             health -= damage;
+        }
+        public override int rollInitiative()
+        {
+            return d20.roll();
+        }
+
+        public override void setInitiative()
+        {
+            Initiative = rollInitiative();
         }
 
     }
