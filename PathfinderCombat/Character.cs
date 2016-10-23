@@ -1,5 +1,4 @@
-﻿
-namespace PathfinderCombat
+﻿namespace PathfinderCombat
 {
     abstract public class Character
     {
@@ -18,6 +17,7 @@ namespace PathfinderCombat
         public abstract void reduce_health(int damage);
         public abstract int rollInitiative();
         public abstract void setInitiative();
+        public abstract void sleep(int range);
     }
     public class Monster : Character
     {
@@ -54,6 +54,15 @@ namespace PathfinderCombat
         public override void setInitiative()
         {
             Initiative = rollInitiative();
+        }
+
+        public override void sleep(int range)
+        {
+            int i = 0;
+            while (i < range)
+            {
+                i++;
+            }
         }
     }
 
@@ -92,5 +101,13 @@ namespace PathfinderCombat
             Initiative = rollInitiative();
         }
 
+        public override void sleep(int range)
+        {
+            int i = 0;
+            while (i < range)
+            {
+                i++;
+            }
+        }
     }
 }

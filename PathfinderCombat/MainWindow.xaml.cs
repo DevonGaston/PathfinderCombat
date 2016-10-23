@@ -11,35 +11,63 @@ namespace PathfinderCombat
         List<Character> order = new List<Character>();
         Character pclass = new Fighter("Fighter", new Longsword(), 1);
         Character living_dead = new Monster("Living Dead", 3, new D4(), new Claws(), 4);
-        int reduce;
+        int reduce = 0;
         public MainWindow()
         {
             InitializeComponent();
         }
         void Battle(object sender, RoutedEventArgs e)
         {
+            if (order.Count > 1)
+            {
+                foreach (Character c in order)
+                {
+                    c.reduce_health(reduce);
+                    if (c.health < 1)
+                    {
+                        GUI.Text = c.name + " has been slain!\n";
+                        order.Remove(c);
+                        break;
+                    }
+                    else
+                    {
+                        GUI.Text = c.name + " has " + c.health + " health\n";
+                        GUI.Text += c.name + " attacks with " + c.w1.name + "...";
+                        c.sleep(999999);
+                        GUI.Text += c.attack() + " is rolled\n";
+                        c.sleep(999999);
+                        reduce = c.damage();
+                        GUI.Text += c.name + " Hits! Deals " + reduce + "damage!\n";
+                        c.sleep(9999999);
+                    }
+                }
+            }
+            else
+            {
+                GUI.Text = "Battle is won.  Please create new characters.";
+            }
+        }
+        void BattleInit(object sender, RoutedEventArgs e)
+        {
             order.Add(pclass);
             order.Add(living_dead);
+            GUI.Text = "Characters rolling for initiative!\n";
             foreach (Character c in order)
             {
                 c.setInitiative();
+                GUI.Text += c.name + " rolled " + c.Initiative + "\n";
+                c.sleep(9999999);
             }
             order.Sort(delegate (Character x, Character y)
             {
                 return x.Initiative.CompareTo(y.Initiative);
             });
-            GUI.Text = pclass.name + " has " + pclass.health + " health\n";
-            GUI.Text += living_dead.name + " has " + living_dead.health + " health\n";
-            GUI.Text += pclass.name + " attacks with " + pclass.w1.name + "..." + pclass.attack() + " is rolled \n";
-            reduce = pclass.damage();
-            GUI.Text += pclass.name + " Hits! Deals " + reduce + " damage!\n";
-            living_dead.reduce_health(reduce);
-            GUI.Text += living_dead.name + " attacks with " + living_dead.w1.name + "..." + living_dead.attack() + " is rolled\n";
-            reduce = living_dead.w1.damage();
-            GUI.Text += living_dead.name + " Hits!  Deals " + reduce + " damage!\n";
-            pclass.reduce_health(reduce);
-
+            int i = 1;
+            foreach (Character c in order)
+            {
+                GUI.Text += c.name + "'s order is " + i + "\n";
+                i++;
+            }
         }
     }
 }
-
