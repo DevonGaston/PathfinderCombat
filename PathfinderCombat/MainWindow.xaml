@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="Pathfinder Battle Simulator" Height="350" Width="525" Background="Bisque">
     <Grid>
-        <Button x:Name="attackButton" Content="Battle" Click ="Battle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="97" Margin="119,242,0,0" Height="38"/>
+        <Button x:Name="attackButton" Content="Battle" Click ="Battle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="188,242,0,0" Height="38"/>
         <TextBlock x:Name="GUI" FontFamily="Century Gothic"  HorizontalAlignment="Left" Height="130" Margin="119,68,0,0" TextWrapping="Wrap" Text="Welcome to the Pathfinder Battle Simulator!" VerticalAlignment="Top" Width="258" Background="Turquoise" />
-        <Button x:Name="initiativeButton" Content="Create Characters" Click="BattleInit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="342,242,0,0" Height="38"/>
+        <Button x:Name="initiativeButton" Content="Create Characters" Click="BattleInit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="348,242,0,0" Height="38"/>
+        <Button x:Name="clearButton" Content="Clear Battle Queue" Click="clear"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="42,242,0,0" Height="38"/>
     </Grid>
 </Window>
