@@ -63,7 +63,8 @@
             BaseAttackBonus = level;
             hitDie = new D10();
             w1 = w;
-            for (int i = 0; i < level; i++)
+            health += 10;
+            for (int i = 1; i < level; i++)
             {
                 health += hitDie.roll();
             }
