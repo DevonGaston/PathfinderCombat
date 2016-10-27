@@ -19,6 +19,7 @@ namespace PathfinderCombat
     {
         public D(int m)
         {
+            Thread.Sleep(3);
             max = m;
         }
         public override int roll()

@@ -11,6 +11,8 @@
         <TextBlock x:Name="GUI" FontFamily="Century Gothic"  HorizontalAlignment="Left" Height="130" Margin="119,68,0,0" TextWrapping="Wrap" Text="Welcome to the Pathfinder Battle Simulator!" VerticalAlignment="Top" Width="258" Background="Turquoise" />
         <Button x:Name="initiativeButton" Content="Create Characters" Click="BattleInit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="348,242,0,0" Height="38"/>
         <Button x:Name="clearButton" Content="Clear Battle Queue" Click="clear"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="42,242,0,0" Height="38"/>
+
         <TextBlock x:Name="Stats" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Battle Statistics: Coming Soon" VerticalAlignment="Top" Height="56" Width="82" Background="AliceBlue" Margin="10,23,0,0"/>
+        <Button x:Name="classButton1" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="407,153,0,0" Height="32" Visibility="Hidden"/>
     </Grid>
 </Window>

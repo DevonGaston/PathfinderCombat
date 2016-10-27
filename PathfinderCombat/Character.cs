@@ -1,4 +1,5 @@
-﻿namespace PathfinderCombat
+﻿
+namespace PathfinderCombat
 {
     abstract public class Character
     {

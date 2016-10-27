@@ -87,7 +87,7 @@ namespace PathfinderCombat
                 }
                 order.Sort(delegate (Character x, Character y)
                 {
-                    return x.Initiative.CompareTo(y.Initiative);
+                    return y.Initiative.CompareTo(x.Initiative);
                 });
                 queue = order.ToArray();
                 int i = 1;
