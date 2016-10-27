@@ -10,7 +10,7 @@
         public Character(string n)
         {
             name = n;
-            d20 = new D20();
+            d20 = new D(20);
         }
         public abstract int attack();
         public abstract int damage();
@@ -61,7 +61,7 @@
         public Fighter(string n, Weapons w, int level) : base(n)
         {
             BaseAttackBonus = level;
-            hitDie = new D10();
+            hitDie = new D(10);
             w1 = w;
             health += 10;
             for (int i = 1; i < level; i++)

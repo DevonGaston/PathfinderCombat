@@ -27,7 +27,7 @@ namespace PathfinderCombat
                 GUI.Text = "Battle Start!\n";
                 foreach(Character c in queue)
                 {
-                    GUI.Text += c.name + " has " + c.health + "health!\n";
+                    GUI.Text += c.name + " has " + c.health + " health!\n";
                 }
                 attackButton.Click -= Battle;
                 attackButton.Click += Attack;
@@ -77,7 +77,7 @@ namespace PathfinderCombat
             {
                 pclass = new Fighter("Fighter", new Longsword(), 1);
                 order.Add(pclass);
-                living_dead = new Monster("Living Dead", 3, new D4(), new Claws(), 4);
+                living_dead = new Monster("Living Dead", 3, new D(4), new Claws(), 4);
                 order.Add(living_dead);
                 GUI.Text = "Characters rolling for initiative!\n";
                 foreach (Character c in order)

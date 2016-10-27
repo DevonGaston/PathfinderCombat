@@ -2,99 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PathfinderCombat
 {
-    public interface Dice
+    public abstract class Dice
     {
-       int roll();
+        public Random shake = new Random();
+        public int result, max;
+        public abstract int roll();
+        public abstract int rattle(int max);
     }
 
-    public class D2 : Dice
+    public class D : Dice
     {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
+        public D(int m)
         {
-            result = (shake.Next(1, 2));
-            return result;
+            max = m;
         }
-    }
-
-    public class D3 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
+        public override int roll()
         {
-            result = (shake.Next(1, 3));
-            return result;
+            return rattle(max);
         }
-    }
 
-    public class D4 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
+        public override int rattle(int m)
         {
-            result = (shake.Next(1, 4));
-            return result;
-        }
-    }
-
-    public class D6 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
-        {
-            result = (shake.Next(1, 6));
-            return result;
-        }
-    }
-
-    public class D8 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
-        {
-            result = (shake.Next(1, 8));
-            return result;
-        }
-    }
-
-    public class D10 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
-        {
-            result = (shake.Next(1, 10));
-            return result;
-        }
-    }
-
-    public class D12 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
-        {
-            result = (shake.Next(1, 12));
-            return result;
-        }
-    }
-
-    public class D20 : Dice
-    {
-        Random shake = new Random();
-        int result;
-        int Dice.roll()
-        {
-            result = (shake.Next(1, 20));
+            result = shake.Next(1, m);
             return result;
         }
     }

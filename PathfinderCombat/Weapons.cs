@@ -20,7 +20,7 @@ namespace PathfinderCombat
     {
         public Longsword() : base()
         {
-            dam = new D10();
+            dam = new D(10);
             name = "Longsword";
         }
         public override int damage()
@@ -34,7 +34,7 @@ namespace PathfinderCombat
         public Claws() : base()
         {
             name = "Claws";
-            dam = new D4();
+            dam = new D(4);
         }
         public override int damage()
         {
