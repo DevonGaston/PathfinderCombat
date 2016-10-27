@@ -11,7 +11,7 @@ namespace PathfinderCombat
         List<Character> order = new List<Character>();
         Character[] queue;
         Character pclass, living_dead; 
-        int reduce = 0, turn = 0;
+        int reduce = 0, turn = 0, qcap = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +32,8 @@ namespace PathfinderCombat
                 attackButton.Click -= Battle;
                 attackButton.Click += Attack;
                 attackButton.Content = "Attack";
-                clearButton.Click -= BattleInit;
+                clearButton.Visibility = Visibility.Hidden;
+                initiativeButton.Visibility = Visibility.Hidden;
             }
         }
 
@@ -53,6 +54,8 @@ namespace PathfinderCombat
                 attackButton.Click -= Attack;
                 attackButton.Click += Battle;
                 attackButton.Content = "Battle";
+                clearButton.Visibility = Visibility.Visible;
+                initiativeButton.Visibility = Visibility.Visible;
                 reduce = 0;
                 return;
             }
