@@ -10,8 +10,8 @@ namespace PathfinderCombat
     {
         List<Character> order = new List<Character>();
         Character[] queue;
-        Character pclass, living_dead;
-        int reduce = 0, turn = 0, qcap = 0;
+        //Character pclass, living_dead;
+        int reduce = 0, turn = 0, qcap = 0, select;
         public MainWindow()
         {
             InitializeComponent();
@@ -42,28 +42,23 @@ namespace PathfinderCombat
                     GUI.Text += c.name + "'s order is " + i + "\n";
                     GUI.Text += c.name + " has " + c.health + " health!\n";
                     i++;
+                    qcap++;
                 }
                 attackButton.Click -= Battle;
                 attackButton.Click += Attack;
                 attackButton.Content = "Attack";
                 clearButton.Visibility = Visibility.Hidden;
-                createButton.Visibility = Visibility.Hidden;
+                createButton.Click -= create;
+                createButton.Click += selectTarget;
+                createButton.Content = "Select Target";
             }
         }
 
         void Attack(object sender, RoutedEventArgs e)
         {
-            if (turn == 2)
+            if (qcap < 2)
             {
-                turn = 0;
-            }
-            queue[turn].reduce_health(reduce);
-
-            if (queue[turn].health < 1)
-            {
-                GUI.Text = queue[turn].name + " has been slain!\n";
-                queue = null;
-                order.Clear();
+                GUI.Text = "Battle is Won!\n";
                 attackButton.Click -= Attack;
                 attackButton.Click += Battle;
                 attackButton.Content = "Battle";
@@ -72,16 +67,36 @@ namespace PathfinderCombat
                 reduce = 0;
                 return;
             }
-
-            else
+            if (turn > qcap)
             {
-                GUI.Text = queue[turn].name + " has " + queue[turn].health + " health\n";
-                GUI.Text += queue[turn].name + " attacks with " + queue[turn].w1.name + "...";
-                GUI.Text += queue[turn].attack() + " is rolled\n";
-                reduce = queue[turn].damage();
-                GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
+                turn = 0;
+            }
+            select = turn;
+
+            GUI.Text = queue[turn].name + " has " + queue[turn].health + " health\n";
+            GUI.Text += queue[turn].name + " attacks with " + queue[turn].w1.name + "...";
+            GUI.Text += queue[turn].attack() + " is rolled\n";
+            reduce = queue[turn].damage();
+            GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
+            queue[select].reduce_health(reduce);
+            GUI.Text += queue[select].name + " now has " + queue[select].health + "health";
+            if (queue[select].health < 1)
+            {
+                GUI.Text = queue[select].name + " has been slain!\n";
+                queue[select] = null;
+                qcap--;
             }
             turn++;
+        }
+
+        void selectTarget(object sender, RoutedEventArgs e)
+        {
+            select++;
+            if(select >= qcap)
+            {
+                select = 0;
+            }
+            GUI.Text = queue[select].name + " is selected target\n";
         }
       
         void clear(object sender, RoutedEventArgs e)
