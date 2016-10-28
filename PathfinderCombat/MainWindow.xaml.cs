@@ -10,7 +10,7 @@ namespace PathfinderCombat
     {
         List<Character> order = new List<Character>();
         Character[] queue;
-        Character pclass, living_dead; 
+        Character pclass, living_dead;
         int reduce = 0, turn = 0, qcap = 0;
         public MainWindow()
         {
@@ -25,15 +25,29 @@ namespace PathfinderCombat
             else
             {
                 GUI.Text = "Battle Start!\n";
-                foreach(Character c in queue)
+                GUI.Text += "Characters rolling for initiative!\n";
+                foreach (Character c in order)
                 {
+                    c.setInitiative();
+                    GUI.Text += c.name + " rolled " + c.Initiative + "\n";
+                }
+                order.Sort(delegate (Character x, Character y)
+                {
+                    return y.Initiative.CompareTo(x.Initiative);
+                });
+                queue = order.ToArray();
+                int i = 1;
+                foreach (Character c in queue)
+                {
+                    GUI.Text += c.name + "'s order is " + i + "\n";
                     GUI.Text += c.name + " has " + c.health + " health!\n";
+                    i++;
                 }
                 attackButton.Click -= Battle;
                 attackButton.Click += Attack;
                 attackButton.Content = "Attack";
                 clearButton.Visibility = Visibility.Hidden;
-                initiativeButton.Visibility = Visibility.Hidden;
+                createButton.Visibility = Visibility.Hidden;
             }
         }
 
@@ -50,12 +64,11 @@ namespace PathfinderCombat
                 GUI.Text = queue[turn].name + " has been slain!\n";
                 queue = null;
                 order.Clear();
-                clearButton.Click -= BattleInit;
                 attackButton.Click -= Attack;
                 attackButton.Click += Battle;
                 attackButton.Content = "Battle";
                 clearButton.Visibility = Visibility.Visible;
-                initiativeButton.Visibility = Visibility.Visible;
+                createButton.Visibility = Visibility.Visible;
                 reduce = 0;
                 return;
             }
@@ -70,37 +83,7 @@ namespace PathfinderCombat
             }
             turn++;
         }
-        void BattleInit(object sender, RoutedEventArgs e)
-        {
-            if (order.Count >= 2)
-            {
-                GUI.Text = "Sorry, reached maximum capacity of combatants.";
-            }
-            else
-            {
-                pclass = new Fighter("Fighter", new Longsword(), 1);
-                order.Add(pclass);
-                living_dead = new Monster("Living Dead", 3, new D(4), new Claws(), 4);
-                order.Add(living_dead);
-                GUI.Text = "Characters rolling for initiative!\n";
-                foreach (Character c in order)
-                {
-                    c.setInitiative();
-                    GUI.Text += c.name + " rolled " + c.Initiative + "\n";
-                }
-                order.Sort(delegate (Character x, Character y)
-                {
-                    return y.Initiative.CompareTo(x.Initiative);
-                });
-                queue = order.ToArray();
-                int i = 1;
-                foreach (Character c in queue)
-                {
-                    GUI.Text += c.name + "'s order is " + i + "\n";
-                    i++;
-                }
-            }
-        }
+      
         void clear(object sender, RoutedEventArgs e)
         {
             if (order.Count == 0)
@@ -113,6 +96,55 @@ namespace PathfinderCombat
                 GUI.Text = "Queue Cleared.";
             }
         }
+        void create(object sender, RoutedEventArgs e)
+        {
+            GUI.Text = "Please select a character to create\n";
+            createButton.Click -= create;
+            createButton.Content = "Fighter";
+            createButton.Click += createFighter;
+            attackButton.Click -= Battle;
+            attackButton.Click += mainMenu;
+            attackButton.Content = "Return to Main Menu";
+            classButton1.Visibility = Visibility.Visible;
+        }
+
+        void createFighter(object sender, RoutedEventArgs e)
+        {
+            if (order.Count >= 2)
+            {
+                GUI.Text = "Sorry, queue is too full\n";
+            }
+            else
+            {
+                order.Add(new Fighter("Fighter", new Longsword(), 1));
+                GUI.Text += "Fighter has been added to queue\n";
+            }
+        }
+
+        void createUndead(object sender, RoutedEventArgs e)
+        {
+            if(order.Count >= 2)
+            {
+                GUI.Text = "Sorry, Queue is too full\n";
+            }
+            else
+            {
+                order.Add(new Monster("Living Dead", 3, new D(4), new Claws(), 3));
+                GUI.Text += "Living Dead has been added to queue\n";
+            }
+        }
+
+        void mainMenu(object sender, RoutedEventArgs e)
+        {
+            createButton.Click -= createFighter;
+            createButton.Content = "Create Characters";
+            createButton.Click += clear;
+            attackButton.Content = "Battle";
+            attackButton.Click -= mainMenu;
+            attackButton.Click += Battle;
+
+        }
     }
+
 }
 
