@@ -10,7 +10,6 @@ namespace PathfinderCombat
     {
         List<Character> order = new List<Character>();
         Character[] queue;
-        //Character pclass, living_dead;
         int reduce = 0, turn = 0, qcap = 0, select;
         public MainWindow()
         {
@@ -58,16 +57,21 @@ namespace PathfinderCombat
         {
             if (qcap < 2)
             {
-                GUI.Text = "Battle is Won!\n";
+                GUI.Text = "Battle is won\n";
+                order.Clear();
+                queue = null;
                 attackButton.Click -= Attack;
                 attackButton.Click += Battle;
                 attackButton.Content = "Battle";
                 clearButton.Visibility = Visibility.Visible;
-                createButton.Visibility = Visibility.Visible;
+                createButton.Click -= selectTarget;
+                createButton.Click += create;
+                createButton.Content = "Create Characters";
                 reduce = 0;
+                qcap = 0;
                 return;
             }
-            if (turn > qcap)
+            if (turn >= qcap)
             {
                 turn = 0;
             }
@@ -89,8 +93,12 @@ namespace PathfinderCombat
             turn++;
         }
 
-        void selectTarget(object sender, RoutedEventArgs e)
-        {
+        void selectTarget(object sender, RoutedEventArgs e) {
+            if (qcap < 2)
+            {
+                GUI.Text += "No more targets to select\n";
+                return;
+            }
             select++;
             if(select >= qcap)
             {
@@ -153,10 +161,11 @@ namespace PathfinderCombat
         {
             createButton.Click -= createFighter;
             createButton.Content = "Create Characters";
-            createButton.Click += clear;
+            createButton.Click += create;
             attackButton.Content = "Battle";
             attackButton.Click -= mainMenu;
             attackButton.Click += Battle;
+            classButton1.Visibility = Visibility.Hidden;
 
         }
     }
