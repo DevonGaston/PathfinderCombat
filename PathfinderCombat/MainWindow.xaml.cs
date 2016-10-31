@@ -87,7 +87,18 @@ namespace PathfinderCombat
             if (queue[select].health < 1)
             {
                 GUI.Text = queue[select].name + " has been slain!\n";
-                queue[select] = null;
+                order.Remove(queue[select]);
+                order.Sort(delegate (Character x, Character y)
+                {
+                    return y.Initiative.CompareTo(x.Initiative);
+                });
+                queue = order.ToArray();
+                int i = 1;
+                foreach (Character c in queue)
+                {
+                    GUI.Text += c.name + "'s order is " + i + "\n";
+                    i++;
+                }
                 qcap--;
             }
             turn++;
@@ -128,33 +139,29 @@ namespace PathfinderCombat
             attackButton.Click -= Battle;
             attackButton.Click += mainMenu;
             attackButton.Content = "Return to Main Menu";
+            clearButton.Click -= clear;
+            clearButton.Click += createRogue;
+            clearButton.Content = "Create Rogue";
             classButton1.Visibility = Visibility.Visible;
         }
 
         void createFighter(object sender, RoutedEventArgs e)
         {
-            if (order.Count >= 2)
-            {
-                GUI.Text = "Sorry, queue is too full\n";
-            }
-            else
-            {
-                order.Add(new Fighter("Fighter", new Longsword(), 1));
-                GUI.Text += "Fighter has been added to queue\n";
-            }
+            order.Add(new Fighter("Fighter", new Longsword(), 1));
+            GUI.Text += "Fighter has been added to queue\n";
         }
 
         void createUndead(object sender, RoutedEventArgs e)
         {
-            if(order.Count >= 2)
-            {
-                GUI.Text = "Sorry, Queue is too full\n";
-            }
-            else
-            {
-                order.Add(new Monster("Living Dead", 3, new D(4), new Claws(), 3));
-                GUI.Text += "Living Dead has been added to queue\n";
-            }
+          
+            order.Add(new Monster("Living Dead", 3, new D(4), new Claws(), 3));
+            GUI.Text += "Living Dead has been added to queue\n";
+        }
+
+        void createRogue(object sender, RoutedEventArgs e)
+        {
+            order.Add(new Rogue("Rogue", new Claws(), 1));
+            GUI.Text += "Rogue has been added to queue\n";
         }
 
         void mainMenu(object sender, RoutedEventArgs e)
@@ -165,6 +172,9 @@ namespace PathfinderCombat
             attackButton.Content = "Battle";
             attackButton.Click -= mainMenu;
             attackButton.Click += Battle;
+            clearButton.Click -= createRogue;
+            clearButton.Click += clear;
+            clearButton.Content = "Clear Battle Queue";
             classButton1.Visibility = Visibility.Hidden;
 
         }
