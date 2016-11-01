@@ -10,7 +10,7 @@ namespace PathfinderCombat
     {
         List<Character> order = new List<Character>();
         Character[] queue;
-        int reduce = 0, turn = 0, qcap = 0, select;
+        int reduce = 0, turn = 0, qcap = 0, select = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -57,7 +57,7 @@ namespace PathfinderCombat
         {
             if (qcap < 2)
             {
-                GUI.Text = "Battle is won\n";
+                GUI.Text += "Battle is won\n";
                 order.Clear();
                 queue = null;
                 attackButton.Click -= Attack;
@@ -75,18 +75,18 @@ namespace PathfinderCombat
             {
                 turn = 0;
             }
-            select = turn;
-
-            GUI.Text = queue[turn].name + " has " + queue[turn].health + " health\n";
+            
+            GUI.Text += "It is " + queue[turn].name + "'s turn. " + queue[turn].name + " has " + queue[turn].health + " health\n";
+            GUI.Text += queue[select].name + " is the intended target\n";
             GUI.Text += queue[turn].name + " attacks with " + queue[turn].w1.name + "...";
             GUI.Text += queue[turn].attack() + " is rolled\n";
             reduce = queue[turn].damage();
             GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
             queue[select].reduce_health(reduce);
-            GUI.Text += queue[select].name + " now has " + queue[select].health + "health";
+            GUI.Text += queue[select].name + " now has " + queue[select].health + "health\n";
             if (queue[select].health < 1)
             {
-                GUI.Text = queue[select].name + " has been slain!\n";
+                GUI.Text += queue[select].name + " has been slain!\n";
                 order.Remove(queue[select]);
                 order.Sort(delegate (Character x, Character y)
                 {
@@ -115,7 +115,7 @@ namespace PathfinderCombat
             {
                 select = 0;
             }
-            GUI.Text = queue[select].name + " is selected target\n";
+            GUI.Text += queue[select].name + " is selected target\n";
         }
       
         void clear(object sender, RoutedEventArgs e)
