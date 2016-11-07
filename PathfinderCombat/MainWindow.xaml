@@ -18,7 +18,8 @@
         <Button x:Name="createButton" Content="Create Characters" Click="create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="43,129,0,0" Height="38" Grid.RowSpan="2"/>
         <Button x:Name="clearButton" Content="Clear Battle Queue" Click="clear"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="42,109.874,0,0" Height="38" Grid.Row="1"/>
 
-        <TextBlock x:Name="Stats" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Battle Statistics: Coming Soon" VerticalAlignment="Top" Height="56" Width="82" Background="AliceBlue" Margin="42,10,0,0"/>
-        <Button x:Name="classButton1" Content="Create Living Dead" Click ="createUndead" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="81,133.874,0,0" Height="32" Visibility="Hidden" Grid.Row="1" />
+        <TextBlock x:Name="Stats" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Battle Statistics: Coming Soon" VerticalAlignment="Top" Height="56" Width="160" Background="AliceBlue" Visibility="Hidden" Margin="608,10,0,0"/>
+        <Button x:Name="classButton1" Content="Create Living Dead" Click ="createUndead" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="647,143,0,0" Height="32" Visibility="Hidden" Grid.RowSpan="2" />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="635,72,0,0" Grid.Row="1" Visibility="Hidden"/>
     </Grid>
 </Window>

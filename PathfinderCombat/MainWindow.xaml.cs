@@ -9,8 +9,12 @@ namespace PathfinderCombat
     public partial class MainWindow : Window
     {
         List<Character> order = new List<Character>();
+        Armor a;
+        Character c;
+        Weapons w;
+        Dice d;
         Character[] queue;
-        int reduce = 0, turn = 0, qcap = 0, select = 1;
+        int reduce, turn = 0, qcap = 0, select = 1, attack, level;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,9 +44,14 @@ namespace PathfinderCombat
                 {
                     GUI.Text += c.name + "'s order is " + i + "\n";
                     GUI.Text += c.name + " has " + c.health + " health!\n";
+                    GUI.Text += c.name + "'s AC is " + c.AC + "\n";
                     i++;
                     qcap++;
                 }
+                GUI.Text += "\n";
+                GUI.Text += "It is " + queue[turn].name + "'s turn. " + queue[turn].name + " has " + queue[turn].health + " health\n";
+                Stats.Visibility = Visibility.Visible;
+                Stats.Text = queue[select].name + " is the intended target\n";
                 attackButton.Click -= Battle;
                 attackButton.Click += Attack;
                 attackButton.Content = "Attack";
@@ -57,13 +66,15 @@ namespace PathfinderCombat
         {
             if (qcap < 2)
             {
-                GUI.Text += "Battle is won\n";
+                turn = 0;
+                GUI.Text += queue[turn].name + " won the battle!\n";
                 order.Clear();
                 queue = null;
                 attackButton.Click -= Attack;
                 attackButton.Click += Battle;
                 attackButton.Content = "Battle";
                 clearButton.Visibility = Visibility.Visible;
+                Stats.Visibility = Visibility.Hidden;
                 createButton.Click -= selectTarget;
                 createButton.Click += create;
                 createButton.Content = "Create Characters";
@@ -71,19 +82,22 @@ namespace PathfinderCombat
                 qcap = 0;
                 return;
             }
-            if (turn >= qcap)
-            {
-                turn = 0;
-            }
-            
-            GUI.Text += "It is " + queue[turn].name + "'s turn. " + queue[turn].name + " has " + queue[turn].health + " health\n";
-            GUI.Text += queue[select].name + " is the intended target\n";
             GUI.Text += queue[turn].name + " attacks with " + queue[turn].w1.name + "...";
-            GUI.Text += queue[turn].attack() + " is rolled\n";
-            reduce = queue[turn].damage();
-            GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
-            queue[select].reduce_health(reduce);
-            GUI.Text += queue[select].name + " now has " + queue[select].health + "health\n";
+            attack = queue[turn].attack();
+            GUI.Text += attack + " is rolled\n";
+            if (attack >= queue[select].AC)
+            {
+                reduce = queue[turn].damage();
+                GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
+                queue[select].reduce_health(reduce);
+                GUI.Text += queue[select].name + " now has " + queue[select].health + " health\n";
+                GUI.Text += "\n";
+            }
+
+            else
+            {
+                GUI.Text += "Attack missed!\n";
+            }
             if (queue[select].health < 1)
             {
                 GUI.Text += queue[select].name + " has been slain!\n";
@@ -102,22 +116,35 @@ namespace PathfinderCombat
                 qcap--;
             }
             turn++;
-        }
-
-        void selectTarget(object sender, RoutedEventArgs e) {
-            if (qcap < 2)
+            if (turn >= qcap)
             {
-                GUI.Text += "No more targets to select\n";
-                return;
+                turn = 0;
             }
+            GUI.Text += "\n";
+            GUI.Text += "It is " + queue[turn].name + "'s turn. " + queue[turn].name + " has " + queue[turn].health + " health\n";
             select++;
-            if(select >= qcap)
+            if (select >= qcap)
             {
                 select = 0;
             }
-            GUI.Text += queue[select].name + " is selected target\n";
+            Stats.Text = queue[select].name + " is selected target\n";
         }
-      
+
+        void selectTarget(object sender, RoutedEventArgs e)
+        {
+            if (qcap < 2)
+            {
+                Stats.Text = "No more targets to select\n";
+                return;
+            }
+            select++;
+            if (select >= qcap)
+            {
+                select = 0;
+            }
+            Stats.Text = queue[select].name + " is selected target\n";
+        }
+
         void clear(object sender, RoutedEventArgs e)
         {
             if (order.Count == 0)
@@ -134,7 +161,7 @@ namespace PathfinderCombat
         {
             GUI.Text = "Please select a character to create\n";
             createButton.Click -= create;
-            createButton.Content = "Fighter";
+            createButton.Content = "Create Fighter";
             createButton.Click += createFighter;
             attackButton.Click -= Battle;
             attackButton.Click += mainMenu;
@@ -147,20 +174,28 @@ namespace PathfinderCombat
 
         void createFighter(object sender, RoutedEventArgs e)
         {
-            order.Add(new Fighter("Fighter", new Longsword(), 1));
+            w = new Longsword();
+            a = new HeavyArmor();
+            c = new Fighter("Fighter", w, a, 1);
+            order.Add(c);
             GUI.Text += "Fighter has been added to queue\n";
         }
 
         void createUndead(object sender, RoutedEventArgs e)
         {
-          
-            order.Add(new Monster("Living Dead", 3, new D(4), new Claws(), 3));
+            d = new D(4);
+            w = new Claws();
+            c = new Monster("Living Dead", 3, d, w, 3);
+            order.Add(c);
             GUI.Text += "Living Dead has been added to queue\n";
         }
 
         void createRogue(object sender, RoutedEventArgs e)
         {
-            order.Add(new Rogue("Rogue", new Claws(), 1));
+            w = new Claws();
+            a = new LightArmor();
+            c = new Rogue("Rogue", w, a, 1);
+            order.Add(c);
             GUI.Text += "Rogue has been added to queue\n";
         }
 
