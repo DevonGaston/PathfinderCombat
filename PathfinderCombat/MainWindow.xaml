@@ -12,8 +12,8 @@
             <RowDefinition Height="166*"/>
         </Grid.RowDefinitions>
         <Button x:Name="Button1" Content="Battle" Click ="Battle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="42,35,0,0" Height="29" Grid.Row="1"/>
-        <ScrollViewer VerticalScrollBarVisibility= "Visible" Height="177" Width="300" HorizontalScrollBarVisibility="Disabled" Margin="149,0" Grid.RowSpan="2">
-            <TextBlock x:Name="GUI" FontFamily="Century Gothic"  HorizontalAlignment="Stretch" Width ="300" TextWrapping="Wrap" Text="Welcome to the Pathfinder Battle Simulator!" VerticalAlignment="Center"  Background="Turquoise" />
+        <ScrollViewer VerticalScrollBarVisibility= "Visible" Height="177" HorizontalScrollBarVisibility="Disabled" Margin="231,71,268,71" Grid.RowSpan="2">
+            <TextBlock x:Name="GUI" FontFamily="Century Gothic"  HorizontalAlignment="Stretch" Width ="317" TextWrapping="Wrap" Text="Welcome to the Pathfinder Battle Simulator!" VerticalAlignment="Center"  Background="Turquoise" />
         </ScrollViewer>
         <Button x:Name="Button2" Content="Create Characters" Click="create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="122" Margin="43,129,0,0" Height="38" Grid.RowSpan="2"/>
         <Button x:Name="Button3" Content="Clear Battle Queue" Click="clear"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="43,87,0,0" Height="32" Grid.Row="1"/>

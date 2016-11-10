@@ -89,8 +89,25 @@ namespace PathfinderCombat
             GUI.Text += attack + " is rolled\n";
             if (attack >= queue[select].AC)
             {
+                GUI.Text += queue[turn].name + " Hits!\n";
                 reduce = queue[turn].damage();
-                GUI.Text += queue[turn].name + " Hits! Deals " + reduce + " damage!\n";
+                GUI.Text += "Damage is " + reduce + "\n";
+                if((attack - queue[turn].BaseAttackBonus) == 20)
+                {
+                    GUI.Text += "Natural 20 rolled! Rolling to confirm critical...\n";
+                    attack = queue[turn].attack();
+                    if (attack >= queue[select].AC)
+                    {
+                        reduce *= queue[turn].w1.crit;
+                        GUI.Text += "Critical hit confirmed.  Damage will be multiplied by " + queue[turn].w1.crit + "\n";
+                        GUI.Text += "Damage is " + reduce + "\n";
+                    }
+                    else
+                    {
+                        GUI.Text += "Critical hit failed.  Damage will be dealt normally\n";
+                    }
+                }
+                GUI.Text += "Attack deals " + reduce + " damage!\n";
                 queue[select].reduce_health(reduce);
                 GUI.Text += queue[select].name + " now has " + queue[select].health + " health\n";
                 GUI.Text += "\n";

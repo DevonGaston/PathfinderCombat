@@ -10,6 +10,7 @@ namespace PathfinderCombat
     {
         protected Dice dam;
         public string name;
+        public int crit;
         public Weapons()
         {
         }
@@ -22,6 +23,7 @@ namespace PathfinderCombat
         {
             dam = new D(10);
             name = "Longsword";
+            crit = 3;
         }
         public override int damage()
         {
@@ -35,6 +37,7 @@ namespace PathfinderCombat
         {
             name = "Claws";
             dam = new D(4);
+            crit = 4;
         }
         public override int damage()
         {
@@ -48,6 +51,7 @@ namespace PathfinderCombat
         {
             name = "Club";
             dam = new D(6);
+            crit = 2;
         }
         public override int damage()
         {

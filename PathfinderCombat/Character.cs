@@ -7,7 +7,7 @@ namespace PathfinderCombat
         public Weapons w1;
         public Armor block;
         public string name;
-        protected int BaseAttackBonus;
+        public int BaseAttackBonus;
         public int health = 0, Initiative, AC;
         public Character(string n)
         {
