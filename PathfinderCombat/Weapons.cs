@@ -41,4 +41,17 @@ namespace PathfinderCombat
             return dam.roll();
         }
     }
+
+    public class Club : Weapons
+    {
+        public Club() : base()
+        {
+            name = "Club";
+            dam = new D(6);
+        }
+        public override int damage()
+        {
+            return dam.roll();
+        }
+    }
 }

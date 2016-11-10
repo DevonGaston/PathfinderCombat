@@ -52,13 +52,13 @@ namespace PathfinderCombat
                 GUI.Text += "It is " + queue[turn].name + "'s turn. " + queue[turn].name + " has " + queue[turn].health + " health\n";
                 Stats.Visibility = Visibility.Visible;
                 Stats.Text = queue[select].name + " is the intended target\n";
-                attackButton.Click -= Battle;
-                attackButton.Click += Attack;
-                attackButton.Content = "Attack";
-                clearButton.Visibility = Visibility.Hidden;
-                createButton.Click -= create;
-                createButton.Click += selectTarget;
-                createButton.Content = "Select Target";
+                Button1.Click -= Battle;
+                Button1.Click += Attack;
+                Button1.Content = "Attack";
+                Button3.Visibility = Visibility.Hidden;
+                Button2.Click -= create;
+                Button2.Click += selectTarget;
+                Button2.Content = "Select Target";
             }
         }
 
@@ -70,14 +70,14 @@ namespace PathfinderCombat
                 GUI.Text += queue[turn].name + " won the battle!\n";
                 order.Clear();
                 queue = null;
-                attackButton.Click -= Attack;
-                attackButton.Click += Battle;
-                attackButton.Content = "Battle";
-                clearButton.Visibility = Visibility.Visible;
+                Button1.Click -= Attack;
+                Button1.Click += Battle;
+                Button1.Content = "Battle";
+                Button3.Visibility = Visibility.Visible;
                 Stats.Visibility = Visibility.Hidden;
-                createButton.Click -= selectTarget;
-                createButton.Click += create;
-                createButton.Content = "Create Characters";
+                Button2.Click -= selectTarget;
+                Button2.Click += create;
+                Button2.Content = "Create Characters";
                 reduce = 0;
                 qcap = 0;
                 return;
@@ -160,30 +160,30 @@ namespace PathfinderCombat
         void create(object sender, RoutedEventArgs e)
         {
             GUI.Text = "Please selext your prefered creation method\n";
-            attackButton.Content = "Quick Create";
-            attackButton.Click -= Battle;
-            attackButton.Click += quickCreate;
-            classButton1.Visibility = Visibility.Visible;
-            createButton.Visibility = Visibility.Hidden;
-            clearButton.Visibility = Visibility.Hidden;
+            Button1.Content = "Quick Create";
+            Button1.Click -= Battle;
+            Button1.Click += quickCreate;
+            Button4.Visibility = Visibility.Visible;
+            Button2.Visibility = Visibility.Hidden;
+            Button3.Visibility = Visibility.Hidden;
         }
         void quickCreate(object sender, RoutedEventArgs e)
         {
             GUI.Text = "Please select a character to create\n";
-            createButton.Visibility = Visibility.Visible;
-            clearButton.Visibility = Visibility.Visible;
-            createButton.Click -= create;
-            createButton.Content = "Create Fighter";
-            createButton.Click += createFighter;
-            attackButton.Click -= quickCreate;
-            attackButton.Click += mainMenu;
-            attackButton.Content = "Return to Main Menu";
-            clearButton.Click -= clear;
-            clearButton.Click += createRogue;
-            clearButton.Content = "Create Rogue";
-            classButton1.Click -= buildCharacter;
-            classButton1.Content = "Create Living Dead";
-            classButton1.Click += createUndead;
+            Button2.Visibility = Visibility.Visible;
+            Button3.Visibility = Visibility.Visible;
+            Button2.Click -= create;
+            Button2.Content = "Create Fighter";
+            Button2.Click += createFighter;
+            Button1.Click -= quickCreate;
+            Button1.Click += mainMenu;
+            Button1.Content = "Return to Main Menu";
+            Button3.Click -= clear;
+            Button3.Click += createRogue;
+            Button3.Content = "Create Rogue";
+            Button4.Click -= buildCharacter;
+            Button4.Content = "Create Living Dead";
+            Button4.Click += createUndead;
         }
 
         void buildCharacter(object sender, RoutedEventArgs e)
@@ -220,19 +220,19 @@ namespace PathfinderCombat
 
         void mainMenu(object sender, RoutedEventArgs e)
         {
-            createButton.Click -= createFighter;
-            createButton.Content = "Create Characters";
-            createButton.Click += create;
-            attackButton.Content = "Battle";
-            attackButton.Click -= mainMenu;
-            attackButton.Click += Battle;
-            clearButton.Click -= createRogue;
-            clearButton.Click += clear;
-            clearButton.Content = "Clear Battle Queue";
-            classButton1.Click -= createUndead;
-            classButton1.Content = "Build Character";
-            classButton1.Click += buildCharacter;
-            classButton1.Visibility = Visibility.Hidden;
+            Button2.Click -= createFighter;
+            Button2.Content = "Create Characters";
+            Button2.Click += create;
+            Button1.Content = "Battle";
+            Button1.Click -= mainMenu;
+            Button1.Click += Battle;
+            Button3.Click -= createRogue;
+            Button3.Click += clear;
+            Button3.Content = "Clear Battle Queue";
+            Button4.Click -= createUndead;
+            Button4.Content = "Build Character";
+            Button4.Click += buildCharacter;
+            Button4.Visibility = Visibility.Hidden;
 
         }
     }
