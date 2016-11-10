@@ -159,17 +159,36 @@ namespace PathfinderCombat
         }
         void create(object sender, RoutedEventArgs e)
         {
+            GUI.Text = "Please selext your prefered creation method\n";
+            attackButton.Content = "Quick Create";
+            attackButton.Click -= Battle;
+            attackButton.Click += quickCreate;
+            classButton1.Visibility = Visibility.Visible;
+            createButton.Visibility = Visibility.Hidden;
+            clearButton.Visibility = Visibility.Hidden;
+        }
+        void quickCreate(object sender, RoutedEventArgs e)
+        {
             GUI.Text = "Please select a character to create\n";
+            createButton.Visibility = Visibility.Visible;
+            clearButton.Visibility = Visibility.Visible;
             createButton.Click -= create;
             createButton.Content = "Create Fighter";
             createButton.Click += createFighter;
-            attackButton.Click -= Battle;
+            attackButton.Click -= quickCreate;
             attackButton.Click += mainMenu;
             attackButton.Content = "Return to Main Menu";
             clearButton.Click -= clear;
             clearButton.Click += createRogue;
             clearButton.Content = "Create Rogue";
-            classButton1.Visibility = Visibility.Visible;
+            classButton1.Click -= buildCharacter;
+            classButton1.Content = "Create Living Dead";
+            classButton1.Click += createUndead;
+        }
+
+        void buildCharacter(object sender, RoutedEventArgs e)
+        {
+            return;
         }
 
         void createFighter(object sender, RoutedEventArgs e)
@@ -210,6 +229,9 @@ namespace PathfinderCombat
             clearButton.Click -= createRogue;
             clearButton.Click += clear;
             clearButton.Content = "Clear Battle Queue";
+            classButton1.Click -= createUndead;
+            classButton1.Content = "Build Character";
+            classButton1.Click += buildCharacter;
             classButton1.Visibility = Visibility.Hidden;
 
         }

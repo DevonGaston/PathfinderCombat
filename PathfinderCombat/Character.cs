@@ -136,4 +136,42 @@ namespace PathfinderCombat
             Initiative = rollInitiative();
         }
     }
+    public class Wizard : Character
+    {
+        public Wizard(string n, Weapons w, Armor a, int level) : base(n)
+        {
+            BaseAttackBonus = level/2;
+            hitDie = new D(4);
+            w1 = w;
+            block = a;
+            AC += block.armor_bonus;
+            health += 4;
+            for (int i = 1; i < level; i++)
+            {
+                health += hitDie.roll();
+            }
+        }
+        public override int attack()
+        {
+            return BaseAttackBonus + d20.roll();
+        }
+
+        public override int damage()
+        {
+            return w1.damage();
+        }
+        public override void reduce_health(int damage)
+        {
+            health -= damage;
+        }
+        public override int rollInitiative()
+        {
+            return d20.roll();
+        }
+
+        public override void setInitiative()
+        {
+            Initiative = rollInitiative();
+        }
+    }
 }
