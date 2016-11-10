@@ -16,6 +16,7 @@ namespace PathfinderCombat
         Dice d;
         Character[] queue;
         int reduce, turn = 0, qcap = 0, select = 1, attack, level;
+        string name;
         public MainWindow()
         {
             InitializeComponent();
@@ -173,6 +174,7 @@ namespace PathfinderCombat
             GUI.Text = "Please select a character to create\n";
             Button2.Visibility = Visibility.Visible;
             Button3.Visibility = Visibility.Visible;
+            Button5.Visibility = Visibility.Visible;
             Button2.Click -= create;
             Button2.Content = "Create Fighter";
             Button2.Click += createFighter;
@@ -219,6 +221,15 @@ namespace PathfinderCombat
             GUI.Text += "Rogue has been added to queue\n";
         }
 
+        void createWizard(object sender, RoutedEventArgs e)
+        {
+            w = new Club();
+            a = new LightArmor();
+            c = new Wizard("Wizard", w, a, 1);
+            order.Add(c);
+            GUI.Text += "Wizard has been added to queue\n";
+        }
+
         void mainMenu(object sender, RoutedEventArgs e)
         {
             Button2.Click -= createFighter;
@@ -234,6 +245,7 @@ namespace PathfinderCombat
             Button4.Content = "Build Character";
             Button4.Click += buildCharacter;
             Button4.Visibility = Visibility.Hidden;
+            Button5.Visibility = Visibility.Hidden;
 
         }
     }
