@@ -6,9 +6,10 @@ namespace PathfinderCombat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
-        List<Character> order = new List<Character>();
+        List<Character> order = new List<Character>();  //List holds all characters created in program
         Armor a;
         Character c;
         Weapons w;
