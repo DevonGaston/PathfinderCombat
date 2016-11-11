@@ -6,7 +6,7 @@ namespace PathfinderCombat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
+
     public partial class MainWindow : Window
     {
         List<Character> order = new List<Character>();  //List holds all characters created in program
@@ -33,7 +33,7 @@ namespace PathfinderCombat
                 GUI.Text += "Characters rolling for initiative!\n";
                 foreach (Character c in order)
                 {
-                    c.setInitiative();
+                    c.rollInitiative();
                     GUI.Text += c.name + " rolled " + c.Initiative + "\n";
                 }
                 order.Sort(delegate (Character x, Character y)
@@ -91,7 +91,7 @@ namespace PathfinderCombat
             {
                 GUI.Text += queue[turn].name + " Hits!\n";
                 reduce = queue[turn].damage();
-                if((attack - queue[turn].BaseAttackBonus) == 20)
+                if ((attack - queue[turn].BaseAttackBonus) == 20)
                 {
                     GUI.Text += "Natural 20 rolled! Rolling to confirm critical...\n";
                     attack = queue[turn].attack();
@@ -264,6 +264,5 @@ namespace PathfinderCombat
 
         }
     }
-
 }
 
