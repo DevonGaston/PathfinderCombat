@@ -346,7 +346,7 @@ namespace PathfinderCombat
         void createRogue(object sender, RoutedEventArgs e)
         {
             w = new Claws();
-            a = new LightArmor();
+            a = new MediumArmor();
             c = new Rogue("Rogue", w, a, 1);
             order.Add(c);
             GUI.Text += "Rogue has been added to queue\n";
@@ -383,4 +383,3 @@ namespace PathfinderCombat
         }
     }
 }
-
