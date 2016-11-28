@@ -8,7 +8,7 @@ namespace PathfinderCombat
     //Contains definitions for Weapons class
     public abstract class Weapons
     {
-        protected Dice dam; //The range of damage the weapon can do as determined by a D object
+        public Dice dam; //The range of damage the weapon can do as determined by a D object
         public string name; //The name of the weapon
         public int crit;  //The multiplier applied to damage on a confirmed critical hit
 
@@ -41,7 +41,7 @@ namespace PathfinderCombat
         public Claws()
         {
             name = "Claws";
-            dam = new D(4);
+            dam = new D(3);
             crit = 4;
         }
         public override int damage()
@@ -57,6 +57,20 @@ namespace PathfinderCombat
             name = "Club";
             dam = new D(6);
             crit = 2;
+        }
+        public override int damage()
+        {
+            return dam.roll();
+        }
+    }
+
+    public class Dagger : Weapons
+    {
+        public Dagger()
+        {
+            name = "Dagger";
+            dam = new D(4);
+            crit = 3;
         }
         public override int damage()
         {

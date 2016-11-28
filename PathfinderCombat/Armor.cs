@@ -8,6 +8,7 @@ namespace PathfinderCombat
     public abstract class Armor
     {
         public int armor_bonus; //The amount added to a Character's AC
+        public string name;  //Holds the name of the armor
 
         //Base constructor allowing the use of the armor_bonus integer
         public Armor()
@@ -22,6 +23,7 @@ namespace PathfinderCombat
         //Constructor: Sets armor_bonus to some arbitrary value
         public LightArmor() : base()
         {
+            name = "Light Armor";
             armor_bonus = 2;
         }
     }
@@ -30,6 +32,7 @@ namespace PathfinderCombat
     {
         public MediumArmor() : base()
         {
+            name = "Medium Armor";
             armor_bonus = 4;
         }
     }
@@ -38,6 +41,7 @@ namespace PathfinderCombat
     {
         public HeavyArmor() : base()
         {
+            name = "Heavy Armor";
             armor_bonus = 6;
         }
     }

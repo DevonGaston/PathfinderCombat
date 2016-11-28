@@ -8,7 +8,7 @@ namespace PathfinderCombat
     abstract public class Character
     {
         protected Dice d20;  //Dice object used to determine results of attack and rollInitiative functions
-        protected Dice hitDie; //Used to determine total hitpoint for Monster and all others with levels > 1
+        public Dice hitDie; //Used to determine total hitpoint for Monster and all others with levels > 1
         public Weapons w1;  //Weapon object used by Characters to attack each other
         public Armor block; //Armor used to increase Character's AC value 
         public string name;  //Name of the Character
@@ -16,7 +16,7 @@ namespace PathfinderCombat
         public int health = 0; //Overall hitpoints of Character (determined by personal constructor)
         public int Initiative; //Value found in rollInitiative(); used to determine order in combat (who goes first, etc.)
         public int AC; //Value that opposing Characters returned attack() value must at least equal in order to successfully hit
-        
+
         //Base constructor: Takes in string n and sets n to it.  Also assigns d20 to a D(20) object and AC to 10 (as determined by Pathfinder system) 
         public Character(string n)
         {
@@ -158,7 +158,7 @@ namespace PathfinderCombat
     {
         public Wizard(string n, Weapons w, Armor a, int level) : base(n)
         {
-            BaseAttackBonus = level/2;
+            BaseAttackBonus = level / 2;
             hitDie = new D(4);
             w1 = w;
             block = a;

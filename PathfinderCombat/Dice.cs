@@ -11,6 +11,7 @@ namespace PathfinderCombat
     public abstract class Dice
     {
         public Random shake = new Random(); //Object used to determine value returned by roll function
+        public string name; //Holds the name of the created dice to verify the range of numbers it can generate
         public int max;  //Contains the maximum value that can be obtained by shake objects Next funciton
         public int result;  //Stores value returned from shake object
 
@@ -26,6 +27,7 @@ namespace PathfinderCombat
         {
             Thread.Sleep(3); //Ensures all D objects exist on different clock ticks (i.e., they can return different values when using the roll function)
             max = m;
+            name = "d" + m;
         }
 
         //return is set to a value randomly generated from shake and then returned

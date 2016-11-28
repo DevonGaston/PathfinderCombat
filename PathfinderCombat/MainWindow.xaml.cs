@@ -93,7 +93,7 @@ namespace PathfinderCombat
         //One Character attacks another
         void Attack(object sender, RoutedEventArgs e)
         {
-            
+
             GUI.Text += queue[turn].name + " attacks " + queue[select].name + " with " + queue[turn].w1.name + "...";
 
             //Attack value is determined
@@ -109,7 +109,6 @@ namespace PathfinderCombat
                 reduce = queue[turn].damage();
 
                 //Check to see if the attack value is a natural 20 (i.e., the randomly determined number unaltered is 20)
-                //Case 1: attack value is >= Character.AC value
                 if ((attack - queue[turn].BaseAttackBonus) == 20)
                 {
                     GUI.Text += "Natural 20 rolled! Rolling to confirm critical...\n";
@@ -154,20 +153,6 @@ namespace PathfinderCombat
                 //Character is removed from the list
                 order.Remove(queue[select]);
 
-                //Order is redetermined
-                order.Sort(delegate (Character x, Character y)
-                {
-                    return y.Initiative.CompareTo(x.Initiative);
-                });
-
-                //queue is assigned to new order in list
-                queue = order.ToArray();
-                int i = 1;
-                foreach (Character c in queue)
-                {
-                    GUI.Text += c.name + "'s order is " + i + "\n";
-                    i++;
-                }
                 //Decrement qcap to reflect that a Character is dead
                 qcap--;
 
@@ -199,6 +184,21 @@ namespace PathfinderCombat
                     //Exit function
                     return;
                 }
+
+                //Order is redetermined
+                order.Sort(delegate (Character x, Character y)
+                {
+                    return y.Initiative.CompareTo(x.Initiative);
+                });
+
+                //queue is assigned to new order in list
+                queue = order.ToArray();
+                int i = 1;
+                foreach (Character c in queue)
+                {
+                    GUI.Text += c.name + "'s order is " + i + "\n";
+                    i++;
+                }
             }
 
             //Increment turn to allow next Character in queue to act when function is accessed again
@@ -229,7 +229,6 @@ namespace PathfinderCombat
                     select = 0;
                 }
             }
-            Stats.Text = "Select is " + select + "\n";
             Stats.Text = queue[select].name + " is selected target\n";
         }
 
@@ -246,7 +245,7 @@ namespace PathfinderCombat
             }
 
             //Prevents Character taking their turn from targeting themselves
-            if(queue[select].name == queue[turn].name)
+            if (queue[select].name == queue[turn].name)
             {
                 select++;
 
@@ -257,8 +256,7 @@ namespace PathfinderCombat
                 }
             }
 
-            Stats.Text = "Select is " + select + "\n";
-            Stats.Text += queue[select].name + " is selected target\n";
+            Stats.Text = queue[select].name + " is selected target\n";
         }
 
         //Removes all Characters in queue
@@ -327,9 +325,15 @@ namespace PathfinderCombat
         {
             w = new Longsword();
             a = new HeavyArmor();
-            c = new Fighter("Fighter", w, a, 1);
+            level = 1;
+            c = new Fighter("Fighter", w, a, level);
             order.Add(c);
             GUI.Text += "Fighter has been added to queue\n";
+            GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
+            GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
+            GUI.Text += "\n";
         }
 
         //Creates a Living Dead with pre-determined variables
@@ -337,19 +341,30 @@ namespace PathfinderCombat
         {
             d = new D(4);
             w = new Claws();
-            c = new Monster("Living Dead", 3, d, w, 3);
+            level = 3;
+            c = new Monster("Living Dead", level, d, w, level);
             order.Add(c);
             GUI.Text += "Living Dead has been added to queue\n";
+            GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
+            GUI.Text += "\n";
         }
 
         //Creates a Rogue with pre-determined variables
         void createRogue(object sender, RoutedEventArgs e)
         {
-            w = new Claws();
+            w = new Dagger();
             a = new MediumArmor();
-            c = new Rogue("Rogue", w, a, 1);
+            level = 1;
+            c = new Rogue("Rogue", w, a, level);
             order.Add(c);
             GUI.Text += "Rogue has been added to queue\n";
+            GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
+            GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
+            GUI.Text += "\n";
         }
 
         //Creates a Wizard with pre-determined variables
@@ -357,9 +372,15 @@ namespace PathfinderCombat
         {
             w = new Club();
             a = new LightArmor();
-            c = new Wizard("Wizard", w, a, 1);
+            level = 1;
+            c = new Wizard("Wizard", w, a, level);
             order.Add(c);
             GUI.Text += "Wizard has been added to queue\n";
+            GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
+            GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
+            GUI.Text += "\n";
         }
 
         //Resets Buttons to original states
