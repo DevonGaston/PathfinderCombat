@@ -331,7 +331,7 @@ namespace PathfinderCombat
             GUI.Text += "Fighter has been added to queue\n";
             GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
             GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
-            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
         }
@@ -346,7 +346,7 @@ namespace PathfinderCombat
             order.Add(c);
             GUI.Text += "Living Dead has been added to queue\n";
             GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
-            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
         }
@@ -362,7 +362,7 @@ namespace PathfinderCombat
             GUI.Text += "Rogue has been added to queue\n";
             GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
             GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
-            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
         }
@@ -378,7 +378,7 @@ namespace PathfinderCombat
             GUI.Text += "Wizard has been added to queue\n";
             GUI.Text += "Weapon equipped is " + c.w1.name + ".  Deals " + c.w1.dam.name + " damage.\n";
             GUI.Text += "Armor equipped is " + c.block.name + ".  Increases AC by " + c.block.armor_bonus + ".\n";
-            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + "per level.\n";
+            GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
         }
