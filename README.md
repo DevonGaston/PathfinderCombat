@@ -19,7 +19,7 @@ big scrolling text box while the character/creature selected to be attacked will
 one.  You may change the target of the attack by pressing the "Select" button.
 
 When you have selected the target you wish the current character/creature to attack, click the "Attack" button.  The program will randomly
-generate the attack roll of the character.  If it hits, the character's weapons will be rolled and applied to the target; if it's a critical,
+generate the attack roll of the character by adding a number between 1 and 20 to the characters Base Attack Bonus.  If it hits (amount rolled >= opponents AC), the character's weapons will be rolled and applied to the target; if it's a critical,
 the damage will be multiplied by the weapon's multiplier. The battle will continue until only one character remains above 0 hit points.
 You will be taken back to the main menu, where you will have to create characters again before initiating a battle again.
 
