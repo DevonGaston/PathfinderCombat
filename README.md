@@ -22,3 +22,5 @@ When you have selected the target you wish the current character/creature to att
 generate the attack roll of the character.  If it hits, the character's weapons will be rolled and applied to the target; if it's a critical,
 the damage will be multiplied by the weapon's multiplier. The battle will continue until only one character remains above 0 hit points.
 You will be taken back to the main menu, where you will have to create characters again before initiating a battle again.
+
+To see the statistics of the premade characters, please refer to the Statistics document.
