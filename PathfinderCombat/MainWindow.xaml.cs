@@ -295,7 +295,7 @@ namespace PathfinderCombat
         void quickCreate(object sender, RoutedEventArgs e)
         {
             GUI.Text = "Please select a character to create\n";
-
+            GUI.Text += "\n";
             //Buttons made visible and functionality changed
             Button2.Visibility = Visibility.Visible;
             Button3.Visibility = Visibility.Visible;
@@ -334,6 +334,7 @@ namespace PathfinderCombat
             GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
+            Button2.Visibility = Visibility.Hidden;
         }
 
         //Creates a Living Dead with pre-determined variables
@@ -349,6 +350,7 @@ namespace PathfinderCombat
             GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
+            Button4.Visibility = Visibility.Hidden;
         }
 
         //Creates a Rogue with pre-determined variables
@@ -365,6 +367,7 @@ namespace PathfinderCombat
             GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
+            Button3.Visibility = Visibility.Hidden;
         }
 
         //Creates a Wizard with pre-determined variables
@@ -381,6 +384,7 @@ namespace PathfinderCombat
             GUI.Text += "Level is " + level + ".  Health increased by " + c.hitDie.name + " per level.\n";
             GUI.Text += "Attack bonus is " + c.BaseAttackBonus + ".\n";
             GUI.Text += "\n";
+            Button5.Visibility = Visibility.Hidden;
         }
 
         //Resets Buttons to original states
@@ -389,12 +393,14 @@ namespace PathfinderCombat
             Button2.Click -= createFighter;
             Button2.Content = "Create Characters";
             Button2.Click += create;
+            Button2.Visibility = Visibility.Visible;
             Button1.Content = "Battle";
             Button1.Click -= mainMenu;
             Button1.Click += Battle;
             Button3.Click -= createRogue;
             Button3.Click += clear;
             Button3.Content = "Clear Battle Queue";
+            Button3.Visibility = Visibility.Visible;
             Button4.Click -= createUndead;
             Button4.Content = "Build Character";
             Button4.Click += buildCharacter;
