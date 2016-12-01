@@ -325,7 +325,7 @@ namespace PathfinderCombat
         {
             w = new Longsword();
             a = new HeavyArmor();
-            level = 1;
+            level = 2;
             c = new Fighter("Fighter", w, a, level);
             order.Add(c);
             GUI.Text += "Fighter has been added to queue\n";
@@ -358,7 +358,7 @@ namespace PathfinderCombat
         {
             w = new Dagger();
             a = new MediumArmor();
-            level = 1;
+            level = 2;
             c = new Rogue("Rogue", w, a, level);
             order.Add(c);
             GUI.Text += "Rogue has been added to queue\n";
@@ -375,7 +375,7 @@ namespace PathfinderCombat
         {
             w = new Club();
             a = new LightArmor();
-            level = 1;
+            level = 2;
             c = new Wizard("Wizard", w, a, level);
             order.Add(c);
             GUI.Text += "Wizard has been added to queue\n";
